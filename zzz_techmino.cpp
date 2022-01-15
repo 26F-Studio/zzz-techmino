@@ -8,9 +8,9 @@ extern "C" {
 #include "lauxlib.h"
 }
 
-const int boardW = 10, boardH = 40;
+static const int boardW = 10, boardH = 40;
 static m_tetris::TetrisEngine<rule_toj::TetrisRule, ai_zzz::TOJ, search_tspin::Search> tetris_ai;
-int combo_table[12] = {0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5};
+static int combo_table[12] = {0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5};
 
 // run(field, hand, hold, canhold, next)
 static int run(lua_State *L) {
