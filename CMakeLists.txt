@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(zzz VERSION 0.1.0)
 
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
 add_library(${PROJECT_NAME} SHARED
     zzz_techmino.cpp
     zzz/ai_zzz.cpp

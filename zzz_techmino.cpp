@@ -65,7 +65,7 @@ static const struct luaL_Reg funcList[] = {
     {"name", name},
     {0, 0}};
 
-extern "C" int luaopen_zzz(lua_State *L) {
+extern "C" __declspec(dllexport) int luaopen_zzz(lua_State *L) {
     luaL_register(L, "zzz", funcList);
     return 1;
 }
