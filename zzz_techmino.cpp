@@ -1,12 +1,10 @@
-#include <cstdio>
+extern "C" {
+#include "lauxlib.h"
+}
 #include "tetris_core.h"
 #include "rule_toj.h"
 #include "ai_zzz.h"
 #include "search_tspin.h"
-
-extern "C" {
-#include "lauxlib.h"
-}
 
 static const int boardW = 10, boardH = 40;
 static m_tetris::TetrisEngine<rule_toj::TetrisRule, ai_zzz::TOJ, search_tspin::Search> tetris_ai;
