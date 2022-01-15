@@ -14,7 +14,7 @@ local field = {
 for i = 21, 400 do
     field[i] = false
 end
-print(zzz.run(field))
+print(zzz.run(field,"S"," ",true,"TIJOLZ"))
 );
 
 int main() {

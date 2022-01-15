@@ -12,7 +12,7 @@ const int boardW = 10, boardH = 40;
 static m_tetris::TetrisEngine<rule_toj::TetrisRule, ai_zzz::TOJ, search_tspin::Search> tetris_ai;
 int combo_table[12] = {0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5};
 
-// run(field, hold, canhold, next)
+// run(field, hand, hold, canhold, next)
 static int run(lua_State *L) {
     if (!tetris_ai.prepare(boardW, boardH)) {
         printf("tetris_ai prepare failed\n");
@@ -22,9 +22,10 @@ static int run(lua_State *L) {
         printf("invalid field\n");
         return 0;
     }
-    const char *hold = lua_tostring(L, 2);
-    bool canhold = lua_toboolean(L, 3);
-    const char *next = lua_tostring(L, 4);
+    const char *hand = lua_tostring(L, 2);
+    const char *hold = lua_tostring(L, 3);
+    bool canhold = lua_toboolean(L, 4);
+    const char *next = lua_tostring(L, 5);
     tetris_ai.ai_config()->table = combo_table;
     tetris_ai.ai_config()->table_max = 12;
     uint8_t board[boardW * boardH];
@@ -43,10 +44,9 @@ static int run(lua_State *L) {
             }
         }
     }
-    m_tetris::TetrisBlockStatus status('S', 4, 20, 0);
-    std::string next = "TIJOLZ";
+    m_tetris::TetrisBlockStatus status(*hand, 3, 20, 0);
     m_tetris::TetrisNode const *node = tetris_ai.get(status);
-    auto target = tetris_ai.run_hold(map, node, *hold, canhold, next.data(), next.size()).target;
+    auto target = tetris_ai.run_hold(map, node, *hold, canhold, next, strlen(next)).target;
     if (target != nullptr) {
         std::vector<char> ai_path = tetris_ai.make_path(node, target, map);
         lua_pushlstring(L, ai_path.data(), ai_path.size());
