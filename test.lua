@@ -1,10 +1,25 @@
-local zzz = require("zzz")
-print(zzz.name())
-local field = {
-    true, false, true, true, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false,
-}
-for i = 21, 400 do
-    field[i] = false
+local zzz = require('zzz')
+local floor = math.floor
+
+---@param s string
+---@return boolean[]
+local function fun(s)
+    local res = {}
+    for i = 1, #s do
+        local a, b = floor((i - 1) / 10), (i - 1) % 10
+        local j = (floor(#s / 10) - a - 1) * 10 + b + 1
+        res[i] = s:sub(j, j) == '0'
+    end
+    while #res < 400 do
+        res[#res + 1] = false
+    end
+    return res
 end
-print(zzz.run(field, "S", " ", true, "TIJOLZ"))
+
+local field = fun(''
+    .. '  0   000 '
+    .. '0000   000'
+    .. '00000 0000'
+)
+print('name:', zzz.name())
+print('keys:', zzz.run(field, 'T', ' ', true, 'SIJOLZ'))
