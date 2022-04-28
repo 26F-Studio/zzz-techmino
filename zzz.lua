@@ -1,5 +1,5 @@
 ---@class zzz
-local zzz={}
+local zzz = {}
 
 ---@return string
 function zzz.name() end
@@ -11,3 +11,5 @@ function zzz.name() end
 ---@param next string
 ---@return string
 function zzz.run(field, hand, hold, canhold, next) end
+
+return zzz
