@@ -1,7 +1,10 @@
 local zzz = require("zzz")
-zzz.sayHello()
-local field = {}
-for i = 1, 200 do
+print(zzz.name())
+local field = {
+    true, false, true, true, false, false, false, false, false, false,
+    false, false, false, false, false, false, false, false, false, false,
+}
+for i = 21, 400 do
     field[i] = false
 end
-print(zzz.testAi(field))
+print(zzz.run(field, "S", " ", true, "TIJOLZ"))
