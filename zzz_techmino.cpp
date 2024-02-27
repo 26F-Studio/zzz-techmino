@@ -46,11 +46,13 @@ static int run(lua_State *L) {
     }
     m_tetris::TetrisBlockStatus status(*hand, 3, 20, 0);
     m_tetris::TetrisNode const *node = tetris_ai.get(status);
-    auto target = tetris_ai.run_hold(map, node, *hold, canhold, next, strlen(next)).target;
+    auto result = tetris_ai.run_hold(map, node, *hold, canhold, next, strlen(next));
+    auto target = result.target;
     if (target != nullptr) {
         std::vector<char> ai_path = tetris_ai.make_path(node, target, map);
         lua_pushlstring(L, ai_path.data(), ai_path.size());
-        return 1;
+        lua_pushboolean(L, result.change_hold);
+        return 2;
     }
     lua_pushnil(L);
     lua_pushstring(L, "got nothing");
